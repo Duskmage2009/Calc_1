@@ -1,2 +1,4 @@
 # Project exclude paths
 /target/
+.idea
+Calc_1.iml
