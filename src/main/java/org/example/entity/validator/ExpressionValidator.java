@@ -21,6 +21,7 @@ public class ExpressionValidator {
 
     private int checkForMathSymbols = 0;
 
+    private int zeroCounter=0;
     public boolean validate(String expression) {
 
         this.expression = expression;
@@ -39,6 +40,15 @@ public class ExpressionValidator {
 
         for (int i = 0; i < expCharacters.size(); i++) {
             if (expCharacters.get(i + 1).getType() != -1) {
+
+                if (expCharacters.get(i).getC() == '0') {
+                    zeroCounter++;
+                    if (zeroCounter > 1) {
+                        throw new IncorrectExpressionException("Double zero: [" + expCharacters.get(i).getC() + "] in expression: " + expression);
+                    }
+                } else {
+                    zeroCounter = 0;
+                }
 
                 if (expCharacters.get(i).getType() == 4) {
                     if (!isNumberCorrect()) {
